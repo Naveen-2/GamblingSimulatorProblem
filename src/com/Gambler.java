@@ -9,6 +9,8 @@ public class Gambler {
 		/**
 		 * Constructor to read user stake amount and default bet amount*/
 		Scanner input = new Scanner(System.in);
+		System.out.print("Please enter number of days you want to play: ");
+		numberOfDays = input.nextInt();
 		System.out.print("Please enter an amount to start with: ");
 		stakeAmount = input.nextInt();
 		System.out.print("Please enter an amount to bet every match: ");
@@ -17,6 +19,7 @@ public class Gambler {
 	}
 	
 	int stakeAmount;
+	int numberOfDays;
 	int startingBetAmount;
 	int initialStakeAmount;
 	int maximumWinningAmount;
@@ -30,21 +33,21 @@ public class Gambler {
 	
 	void bet() {
 		double isBetWon = Math.floor((Math.random() * 10) % 2);
-		System.out.println(isBetWon);
+		//System.out.println(isBetWon);
 		
 		/**
 		 * if player won bet amount will be added to stake amount 
 		 * else it'll be deducted */
 		if(isBetWon == 1) {
-			System.out.println("Player Won the round.");
+			//System.out.println("Player Won the round.");
 			stakeAmount += startingBetAmount;
 
-			System.out.println(stakeAmount);
+			//System.out.println(stakeAmount);
 			
 		} else if (isBetWon == 0) {
-			System.out.println("Player Lost the round.");
+			//System.out.println("Player Lost the round.");
 			stakeAmount -= startingBetAmount;
-			System.out.println(stakeAmount);
+			//System.out.println(stakeAmount);
 			
 		}
 	}
