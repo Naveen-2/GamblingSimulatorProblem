@@ -3,8 +3,7 @@ package com;
 import java.util.Scanner;
 
 public class Gambler {
-	int stakeAmount;
-	int startingBetAmount;
+	
 	
 	Gambler(){
 		/**
@@ -17,16 +16,59 @@ public class Gambler {
 		input.close();
 	}
 	
+	int stakeAmount;
+	int startingBetAmount;
+	int initialStakeAmount;
+	int maximumWinningAmount;
+	int maximumLosingAmount;
+	
+	public void initiateBetting() {
+		initialStakeAmount = stakeAmount;
+		maximumWinningAmount = initialStakeAmount + (initialStakeAmount/2);
+		maximumLosingAmount = initialStakeAmount - (initialStakeAmount/2);
+	}
+	
 	void bet() {
 		double isBetWon = Math.floor((Math.random() * 10) % 2);
 		System.out.println(isBetWon);
+		
+		/**
+		 * if player won bet amount will be added to stake amount 
+		 * else it'll be deducted */
 		if(isBetWon == 1) {
 			System.out.println("Player Won the round.");
-			stakeAmount += 1;
+			stakeAmount += startingBetAmount;
+
+			System.out.println(stakeAmount);
 			
 		} else if (isBetWon == 0) {
 			System.out.println("Player Lost the round.");
-			stakeAmount -= 1;
+			stakeAmount -= startingBetAmount;
+			System.out.println(stakeAmount);
+			
 		}
+	}
+	
+	boolean gamblerLeavingStage() {
+		
+		while(stakeAmount < maximumWinningAmount || stakeAmount > maximumLosingAmount) {
+			
+			bet();
+			
+			/** if player reaches maximum winning amount
+			 * return true
+			 */
+			
+			if(stakeAmount == maximumWinningAmount)
+				return false;
+			
+			/**player reaches maximum losing amount
+			 * return false
+			 */
+			else if(stakeAmount == maximumLosingAmount)
+				return true;
+		}
+		
+		return true;
 	}
 }
